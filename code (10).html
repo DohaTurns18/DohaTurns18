@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Doha!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffe6f0, #a4e0f5, #f0f8ff);
+            color: #333;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Sparkles Animation */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #009dff, #fff);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #52a8ee;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #4782ff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #51c8ff;
+            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Clickable GIF */
+        .memory-gif {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-gif:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .modal-gallery video, .modal-gallery img {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #51c8ff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Audio Gallery */
+        .audio-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .audio-gallery audio {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero img {
+                width: 150px;
+                height: 150px;
+            }
+            .section h2 {
+                font-size: 2rem;
+            }
+            .memory-gif {
+                width: 150px;
+                height: 150px;
+            }
+            .modal-gallery video, .modal-gallery img {
+                width: 120px;
+                height: 120px;
+            }
+            .audio-gallery audio {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Sparkles -->
+    <div class="sparkle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="left: 20%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="left: 40%; animation-delay: 3s;"></div>
+    <div class="sparkle" style="left: 50%; animation-delay: 4s;"></div>
+    <div class="sparkle" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="sparkle" style="left: 70%; animation-delay: 6s;"></div>
+    <div class="sparkle" style="left: 80%; animation-delay: 7s;"></div>
+    <div class="sparkle" style="left: 90%; animation-delay: 8s;"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="image/doha.jpg" alt="Doha">
+        <h1>Happy Birthday Doha!</h1>
+        <p>On this unforgettable day, we want to honor the amazing person you’ve grown into. Your sweetness, your joy, and your constant support have brought so much light into our lives. We’re truly thankful to call you our friend; you’ve stood beside us through every moment. May your 18th birthday give you all the happiness you’ve been wishing for, and may this new chapter be filled with love, new adventures, and endless smiles.
+Happy 18th Birthday, doha 🎊.</p>
+    </section>
+
+    <!-- About Doha -->
+    <section class="section">
+        <h2>About Doha</h2>
+        <p>Doha is a radiant soul with a heart of gold. She's compassionate, witty, and always brings a smile to everyone's face. Her infectious energy lights up any room, and her loyalty as a friend is unmatched. Doha has a passion for creativity and a gentle spirit that makes her truly one-of-a-kind.</p>
+    </section>
+
+    <!-- Birthday Wishes -->
+    <section class="section">
+        <h2>Birthday Wishes</h2>
+        <p>May your birthday be as sweet as your personality, Doha. Wishing you a year ahead filled with dreams coming true, laughter that echoes, and love that surrounds you. You're a blessing to all who know you – here's to many more adventures and cherished memories!</p>
+    </section>
+
+    <!-- Memories Together -->
+    <section class="section">
+        <h2>Memories Together</h2>
+        <img src="gif/memories.gif" alt="Click to reveal memories" class="memory-gif" onclick="openModal()">
+    </section>
+
+    <!-- Modal for Memories -->
+    <div id="memoriesModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h2>Our Cherished Memories</h2>
+            <div class="modal-gallery">
+                <video controls muted>
+                    <source src="video/placeholder1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <img src="image/memory1.jpg" alt="Memory 1">
+                <video controls muted>
+                    <source src="video/placeholder2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <img src="image/memory2.jpg" alt="Memory 2">
+                <video controls muted>
+                    <source src="video/placeholder3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <img src="image/memory3.jpg" alt="Memory 3">
+                <video controls muted>
+                    <source src="video/placeholder4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                 <img src="image/memory4.jpg" alt="Memory 4">
+             <video controls muted>
+                <source src="video/placeholder5.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="image/memory5.jpg" alt="Memory 5">
+            <video controls muted>
+                <source src="video/placeholder6.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="image/memory6.jpg" alt="Memory 5">
+            <video controls muted>
+                <source src="video/placeholder7.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="image/memory7.jpg" alt="Memory 5">
+            <video controls muted>
+                <source src="video/placeholder8.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+             <img src="image/memory8.jpg" alt="Memory 5">
+            <video controls muted>
+                <source src="video/placeholder9.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="image/memory9.jpg" alt="Memory 5">
+            <video controls muted>
+                <source src="video/placeholder10.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+             <img src="image/memory10.jpg" alt="Memory 5">
+             <video controls muted>
+                <source src="video/placeholder11.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="image/memory11.jpg" alt="Memory 5">
+             <video controls muted>
+                <source src="video/placeholder12.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="image/memory12.jpg" alt="Memory 5">
+             <video controls muted>
+                <source src="video/placeholder13.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message for Doha -->
+    <section class="section">
+        <h2>Message for Doha</h2>
+        <div class="audio-gallery">
+            <audio controls>
+                <source src="audio/message1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio controls>
+                <source src="audio/message2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio controls>
+                <source src="audio/message3.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio controls>
+                <source src="audio/message4.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+             </audio>
+                        <audio controls>
+                <source src="audio/message5.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio controls>
+                <source src="audio/message6.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio controls>
+                <source src="audio/message7.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio controls>
+                <source src="audio/message8.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </section>
+
+    <script>
+        // Simple confetti effect on load (optional enhancement)
+        window.addEventListener('load', function() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'fixed';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.pointerEvents = 'none';
+            confettiContainer.style.zIndex = '1000';
+            document.body.appendChild(confettiContainer);
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = ['#4569AD', '#87C3EB', '#fff'][Math.floor(Math.random() * 3)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+                confettiContainer.appendChild(confetti);
+            }
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to { transform: translateY(100vh) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            setTimeout(() => {
+                confettiContainer.remove();
+            }, 5000);
+        });
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('memoriesModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('memoriesModal').style.display = 'none';
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('memoriesModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
